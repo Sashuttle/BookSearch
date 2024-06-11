@@ -1,4 +1,4 @@
-//FIXME: Fix this file
+//FIXME: Create an Apollo Provider to make every request work with the Apollo server
 import './App.css';
 import { Outlet } from 'react-router-dom';
 

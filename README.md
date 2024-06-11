@@ -33,6 +33,8 @@ https://react.dev/
 MongoDB - A simple and expressive query API to retrieve and modify documents in a single collection or join across collections. 
 https://www.mongodb.com/
 
+## Acknowledgements
+This project was completed witht he help of Xpert learning assistant and chat gpt. I would also like to give my classmate, Max recognition, for giving me advice on file structure for this project. 
 
 ## License
 MIT
