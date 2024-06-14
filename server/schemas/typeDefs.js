@@ -1,5 +1,5 @@
 // import setup for apollo server with express
-const {gql} = require('apollo-server-express');
+const { gql } = require('apollo-server-express');
 
 // Query[x], Mutation[x], User[x], Book[x], Auth[x]
 const typeDefs = gql`
@@ -32,7 +32,7 @@ const typeDefs = gql`
     type Mutation {
         login(email: String!, password: String!): Auth
         addUser(username: String!, email: String!, password: String!): Auth
-        saveBook(newBook: BookInput!): User
+        saveBook(newBook: InputBook!): User
         removeBook(bookId: ID!): User
     }
 
