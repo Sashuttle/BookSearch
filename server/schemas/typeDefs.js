@@ -36,7 +36,7 @@ const typeDefs = gql`
         removeBook(bookId: ID!): User
     }
 
-    input BookInput {
+    input InputBook {
         bookId: String
         authors: [String]
         description: String

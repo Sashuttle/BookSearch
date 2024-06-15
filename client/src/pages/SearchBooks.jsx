@@ -1,12 +1,13 @@
 //FIXME: Fix this file
 import React, { useState, useEffect } from 'react';
 import {
+  Jumbotron,
   Container,
   Col,
   Form,
   Button,
   Card,
-  Row
+  CardColumns
 } from 'react-bootstrap';
 
 import Auth from '../utils/auth';
@@ -81,10 +82,10 @@ const SearchBooks = () => {
 
     try {
       await saveBook({
-        variables: {book: bookToSave},
+        variables: { book: bookToSave },
         update: cache => {
-          const {me} = cache.readQuery({ query: GET_ME});
-          cache.writeQuery({ query: GET_ME, data: {me: {...me, savedBooks: [...me.savedBooks, bookToSave]}}})
+          const { me } = cache.readQuery({ query: GET_ME});
+          cache.writeQuery({ query: GET_ME, data: {me: {...me, savedBooks: [...me.savedBooks, bookToSave] } } })
         }
       });
 
@@ -95,6 +96,7 @@ const SearchBooks = () => {
     }
   };
 
+  //add jumbotron code
   return (
     <>
       <div className="text-light bg-dark p-5">
