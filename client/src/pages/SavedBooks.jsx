@@ -16,6 +16,7 @@ const SavedBooks = () => {
   const {loading, data} = useQuery(GET_ME);
   const [removeBook] = useMutation(REMOVE_BOOK);
   const userData = data?.me || {};
+  
 
   // create function that accepts the book's mongo _id value as param and deletes the book from the database
   const handleDeleteBook = async (bookId) => {
@@ -26,22 +27,29 @@ const SavedBooks = () => {
     }
 
     try {
-      const response = await removeBook({variables: {bookId} });
-        console.log('Deleted book', response);
-        if (error) {
-          console.log(error);
+      await deleteBook({
+        variables: { bookId: bookId },
+        update: cache => {
+          const data = cache.readQuery({ query: GET_ME });
+          const userDataCache = data.me;
+          const savedBooksCache = userDataCache.savedBooks;
+          const updatedBookCache = savedBooksCache.filter((book) => book.bookId !== bookId);
+          data.me.savedBooks = updatedBookCache;
+          cache.writeQuery({ query: GET_ME, data: { data: {...data.me.savedBooks} } })
         }
-        removeBookId(bookId);
-      } catch (error) {
-        console.error(error)
-      };
-
+      });
+      removeBookId(bookId);
+    } catch (err) {
+      console.error(err);
+    }
+  
 
   // if data isn't here yet, say so
   if (loading) {
     return <h2>LOADING...</h2>;
   }
 
+  //add jumbotron code
   return (
     <>
       <div fluid className="text-light bg-dark p-5">
@@ -80,3 +88,22 @@ const SavedBooks = () => {
 }};
 
 export default SavedBooks;
+
+
+
+
+
+
+
+    /*
+    //trying different code this originally went where line 29 is
+    try {
+      const response = await removeBook({variables: {bookId} });
+        console.log('Deleted book', response);
+        if (error) {
+          console.log(error);
+        }
+        removeBookId(bookId);
+      } catch (error) {
+        console.error(error)
+      }; */

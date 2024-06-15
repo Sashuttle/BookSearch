@@ -4,7 +4,7 @@ import {gql} from '@apollo/client';
 //user and saved book data (loads savedbooks)
 export const GET_ME = gql`
     {
-        me{
+        me {
             _id
             username
             email
